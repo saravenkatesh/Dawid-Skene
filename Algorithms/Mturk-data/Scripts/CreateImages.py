@@ -1,0 +1,29 @@
+from Confusion_Matrix_script import Posterior
+
+labels = [1,2,3,4,5,6]
+    
+truth = []
+f = open('scripttruth.txt', 'r')
+y = f.readline()
+for i in y:
+    truth.append(int(i))
+f.close()
+    
+annotators = []
+g = open('scriptannlabels.txt', 'r')
+z = g.readline()
+while z != "":
+    if z != '\n':
+        given = []
+        z = z.strip()
+        for i in z:
+            given.append(int(i))
+        annotators.append(given)
+    z = g.readline()
+g.close()
+
+x = Posterior(annotators, labels, truth)
+allmats = x.allMatrices()
+
+for i,j in enumerate(allmats):
+    x.CreateImgs(j, 'script-'+str(i)+'.jpg')

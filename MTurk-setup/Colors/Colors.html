@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Caltech Vision MTurk HIT</title>
+    <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.9.custom.css" rel="stylesheet" />
+    <link type="text/css" href="css/styles.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.9.custom.min.js"></script>
+      <script type="text/javascript" src="js/json2.js"></script>
+    <!-- Insert HIT Parameters Here -->
+      <script type="text/javascript" src="js/main.js"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- WORK SCREEN -->
+      <div class="view content" id="work-screen" style="display:none;">
+        <div class="image-cell"></div>
+        <div class="side-cell">
+          <div id="side-instructions"></div>
+          <div id="choices">
+            <div id="choices-saving">
+              Wait a second while saving...<br>
+              <img src="spinner.gif">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- WORK NAVIGATOR -->
+      <div class="view navigator" id="work-nav" style="display:none;">
+        <button id="prev-image">Previous Image</button>
+        <div id="image-count-wrapper">
+          Image <span id="current-image"></span>/<span id="max-images"></span>
+        </div>
+
+      </div>
+      <!-- START SCREEN -->
+      <div class="view content notice" id="start-screen">
+
+        <div class=divider id=”welcome-text”>
+
+            <button id="start-work">Start working</button>
+          </p>
+        </div>
+      </div>
+      <!-- END SCREEN -->
+      <div class="view content notice" id="end-screen" style="display:none;">
+        <div class="divider">
+          Thank you for completing the HIT! If you have any feedback,
+          please provide it by clicking the button below
+          (not required to submit the HIT).
+          <p style="text-align: center;">
+            <button id="feedback-button">Provide Feedback</button>
+          </p>
+        </div>
+        <div class="divider" id="feedback-wrapper" style="display: none;">
+          <h2>Feedback</h2>
+          <textarea id="feedback-field"></textarea>
+        </div>
+        <div>
+          <p style="text-align: center;">
+            <button id="submit">Submit HIT</button>
+          </p>
+        </div>
+      </div>
+      <!-- TRAINING INTRO SCREEN -->
+      <div class="view content" id="train-intro-screen" style="display:none;">
+        <div class="image-cell"></div>
+        <div class="side-cell">
+          <div id="training-instructions">
+            Please do that.
+          </div>
+          <button id="start-view-examples">View Examples</button>
+        </div>
+      </div>
+      <!-- TRAINING EXAMPLE SCREEN -->
+      <div class="view content" id="train-example-screen" style="display:none;">
+        <div class="image-cell"></div>
+        <div class="side-cell">
+          <div id="answer-incorrect" style="display:none;">
+            <strong>Answer incorrect!</strong><br>
+            But that's OK, that is what the training is for. Please try the next example.
+          </div>
+          <div id="answer-correct" style="display:none;">
+            <strong>Right answer!</strong><br>
+            Well done! Please go on to the next example.
+          </div>
+          <div id="example-text"></div>
+          <div id="reward-feedback">
+            <div id="your-answer"></div>
+            <div id="your-score"></div>
+            <div id="your-total-score"></div>
+          </div>
+          <div id="example-choices"></div>
+          <div class="button-wrapper">
+            <button id="next-example">Next Example</button>
+          </div>
+        </div>
+      </div>
+      <!-- TRAINING NAVIGATOR -->
+      <div class="view navigator" id="example-nav" style="display:none;">
+        <button id="prev-example">Previous Example</button>
+        <div id="example-count-wrapper">
+          Example <span id="current-example"></span>/<span id="max-example"></span>
+          <span id="score-display" style="display:none;">[Your current score is <span id="score">0</span>]</span>
+        </div>
+        <button id="resume-work">
+          Resume work
+        </button>
+      </div>
+      <!-- TRAINING DONE SCREEN -->
+      <div class="view content notice" id="train-done-screen" style="display:none;">
+        <div class="divider">
+          Thank you for completing the training session! You do not
+          have to go through the training again for future HITs of
+          the same kind.
+        </div>
+        <div class="divider" id="post-train-feedback"></div>
+        <div>
+          <p style="text-align: center;">
+            <button id="start-work-after-train" style="display: none;">Start working!</button>
+            <button id="resume-work-after-train" style="display: none;">Resume work!</button>
+          </p>
+        </div>
+      </div>
+      <!-- TRAINING DONE SCREEN -->
+      <div class="view content notice" id="preview-filter" style="display:none;">
+        You must accept the HIT before you can start working on it.
+      </div>
+      <!-- EXCLUDE WORKERS SCREEN -->
+      <div class="view content notice" id="exclude-workers" style="display:none;">
+        Unfortunately you cannot work on HITs of this kind for a while.
+        This is due to a restriction in our experiments.
+        Please return the HIT and try again tomorrow.
+        Sorry for the inconvenience.
+      </div>
+      <!-- FORM -->
+      <div id="form-div" style="display:none;">
+        <form id="mturk-form" method="post">
+          <input type="hidden" name="assignmentId" id="assignmentId" value=""/>
+          <input type="hidden" name="browser_name" id="browser_name" value=""/>
+          <input type="hidden" name="browser_version" id="browser_version" value=""/>
+          <input type="hidden" name="user_agent" id="user_agent" value=""/>
+          <input type="hidden" name="screen_width" id="screen_width" value=""/>
+          <input type="hidden" name="screen_height" id="screen_height" value=""/>
+          <input type="hidden" name="feedback" id="feedback" value=""/>
+          <input type="hidden" name="training" id="training" value=""/>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+
